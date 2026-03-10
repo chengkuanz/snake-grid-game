@@ -18,6 +18,8 @@ A minimal browser-based implementation of the classic Snake game.
 - Score tracking
 - Game over on wall or self collision
 - Restart and pause/resume
+- Customizable board size
+- Responsive layout that fits short, wide desktop windows better
 - English/French UI language switcher
 
 ## Controls
