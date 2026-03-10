@@ -2,7 +2,13 @@
 
 A minimal browser-based implementation of the classic Snake game.
 
-Built with assistance from Codex Assistant.
+## Live Demo
+
+[Play on GitHub Pages](https://chengkuanzhao.github.io/snake-grid-game/)
+
+## Screenshot
+
+![Snake Grid Game Screenshot](assets/screenshot.png)
 
 ## Features
 
