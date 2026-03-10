@@ -1,26 +1,30 @@
-# snake-grid-game
+# Classic Snake
 
-Classic browser-based Snake game built with vanilla JavaScript featuring grid movement, food spawning, score tracking, collision game-over, and restart/pause controls.
+A minimal browser-based implementation of the classic Snake game.
 
 Built with assistance from Codex Assistant.
 
-## Demo
+## Features
 
-Open `index.html` in any modern browser.
-
-## How to Play
-
-Guide the snake to eat food and grow as long as possible.
-Avoid hitting the walls or your own body.
+- Fixed grid movement loop
+- Snake growth when food is eaten
+- Random food spawn on free cells only
+- Score tracking
+- Game over on wall or self collision
+- Restart and pause/resume
 
 ## Controls
 
-- Move: Arrow keys or `W A S D`
+- Keyboard: Arrow keys or `W A S D`
 - Pause/Resume: `Space` or **Pause** button
 - Restart: **Restart** button
 - Mobile/small screens: on-screen direction buttons
 
-## Project Structure
+## Run
+
+Open `index.html` in any modern browser.
+
+## Files
 
 - `index.html` - page structure
 - `styles.css` - minimal styling
@@ -39,14 +43,8 @@ Avoid hitting the walls or your own body.
 - Pause freezes movement; Resume continues from same state.
 - Restart resets score, snake, food, and game-over state.
 
-## Test (optional)
-
-If Node.js is installed:
+## Test (if Node.js is installed)
 
 ```bash
 node --test snake-logic.test.js
 ```
-
-## License
-
-MIT
