@@ -4,11 +4,11 @@ A minimal browser-based implementation of the classic Snake game.
 
 ## Live Demo
 
-[Play on GitHub Pages](https://chengkuanzhao.github.io/snake-grid-game/)
+[Play on GitHub Pages](https://chengkuanz.github.io/snake-grid-game/)
 
 ## Screenshot
 
-![Snake Grid Game Screenshot](assets/screenshot.png)
+![Snake Grid Game Screenshot](./assets/screenshot.png)
 
 ## Features
 
