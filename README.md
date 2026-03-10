@@ -8,7 +8,7 @@ A minimal browser-based implementation of the classic Snake game.
 
 ## Screenshot
 
-![Snake Grid Game Screenshot](./assets/screenshot.png)
+![Snake Grid Game Screenshot](./screenshot.png)
 
 ## Features
 
