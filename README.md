@@ -1,4 +1,4 @@
-# Classic Snake
+# Snake Grid Game
 
 A minimal browser-based implementation of the classic Snake game.
 
@@ -24,26 +24,21 @@ Built with assistance from Codex Assistant.
 
 Open `index.html` in any modern browser.
 
+Optional local server (if needed for your browser settings):
+
+```bash
+npx serve .
+```
+
 ## Files
 
 - `index.html` - page structure
-- `styles.css` - minimal styling
+- `styles.css` - styling
 - `snake.js` - game logic + rendering + input handling
 - `snake-logic.js` - deterministic core logic module
 - `snake-logic.test.js` - core logic tests
 
-## Manual Verification Checklist
-
-- Snake is visible at start and moves automatically.
-- Arrow keys and WASD both control direction.
-- Direct reverse direction is ignored.
-- Eating food increases score by 1 and grows snake length by 1.
-- Food does not spawn on snake cells.
-- Hitting a wall ends the game and status shows **Game Over**.
-- Pause freezes movement; Resume continues from same state.
-- Restart resets score, snake, food, and game-over state.
-
-## Test (if Node.js is installed)
+## Test (optional)
 
 ```bash
 node --test snake-logic.test.js
