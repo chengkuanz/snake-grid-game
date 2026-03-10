@@ -97,6 +97,15 @@ function tick(state, rng = Math.random) {
 const board = document.getElementById('board');
 const scoreEl = document.getElementById('score');
 const statusEl = document.getElementById('status');
+const scoreLabelEl = document.getElementById('score-label');
+const stateLabelEl = document.getElementById('state-label');
+const helpTextEl = document.getElementById('help-text');
+const languageLabelEl = document.getElementById('language-label');
+const languageSelectEl = document.getElementById('language-select');
+const dirUpEl = document.getElementById('dir-up');
+const dirLeftEl = document.getElementById('dir-left');
+const dirDownEl = document.getElementById('dir-down');
+const dirRightEl = document.getElementById('dir-right');
 const restartBtn = document.getElementById('restart');
 const pauseBtn = document.getElementById('pause');
 const touchButtons = document.querySelectorAll('[data-dir]');
@@ -105,6 +114,78 @@ const ctx = board.getContext('2d');
 const cellSize = board.width / GRID_SIZE;
 
 let state = createInitialState();
+let language = 'en';
+
+const I18N = {
+  en: {
+    pageTitle: 'Snake',
+    languageLabel: 'Language',
+    scoreLabel: 'Score',
+    stateLabel: 'State',
+    statusRunning: 'Running',
+    statusPaused: 'Paused',
+    statusGameOver: 'Game Over',
+    restart: 'Restart',
+    pause: 'Pause',
+    resume: 'Resume',
+    up: 'Up',
+    left: 'Left',
+    down: 'Down',
+    right: 'Right',
+    help: 'Use Arrow keys or WASD to move.',
+    boardAria: 'Snake game board',
+    hudAria: 'Game status',
+    controlsAria: 'Controls',
+    touchAria: 'On-screen controls',
+    languageAria: 'Language selector',
+  },
+  fr: {
+    pageTitle: 'Serpent',
+    languageLabel: 'Langue',
+    scoreLabel: 'Score',
+    stateLabel: 'Etat',
+    statusRunning: 'En cours',
+    statusPaused: 'En pause',
+    statusGameOver: 'Termine',
+    restart: 'Recommencer',
+    pause: 'Pause',
+    resume: 'Reprendre',
+    up: 'Haut',
+    left: 'Gauche',
+    down: 'Bas',
+    right: 'Droite',
+    help: 'Utilisez les fleches ou WASD pour vous deplacer.',
+    boardAria: 'Plateau du jeu Serpent',
+    hudAria: 'Etat du jeu',
+    controlsAria: 'Commandes',
+    touchAria: 'Commandes a l ecran',
+    languageAria: 'Selecteur de langue',
+  },
+};
+
+function t(key) {
+  return I18N[language][key];
+}
+
+function applyTranslations() {
+  document.documentElement.lang = language;
+  document.title = t('pageTitle');
+  languageLabelEl.textContent = t('languageLabel');
+  scoreLabelEl.textContent = t('scoreLabel');
+  stateLabelEl.textContent = t('stateLabel');
+  restartBtn.textContent = t('restart');
+  dirUpEl.textContent = t('up');
+  dirLeftEl.textContent = t('left');
+  dirDownEl.textContent = t('down');
+  dirRightEl.textContent = t('right');
+  helpTextEl.textContent = t('help');
+
+  board.setAttribute('aria-label', t('boardAria'));
+  document.querySelector('.hud').setAttribute('aria-label', t('hudAria'));
+  document.querySelector('.controls').setAttribute('aria-label', t('controlsAria'));
+  document.querySelector('.touch').setAttribute('aria-label', t('touchAria'));
+  document.querySelector('.language').setAttribute('aria-label', t('languageAria'));
+}
 
 function render() {
   drawGrid();
@@ -112,8 +193,12 @@ function render() {
   drawSnake();
 
   scoreEl.textContent = String(state.score);
-  statusEl.textContent = state.gameOver ? 'Game Over' : state.paused ? 'Paused' : 'Running';
-  pauseBtn.textContent = state.paused ? 'Resume' : 'Pause';
+  statusEl.textContent = state.gameOver
+    ? t('statusGameOver')
+    : state.paused
+      ? t('statusPaused')
+      : t('statusRunning');
+  pauseBtn.textContent = state.paused ? t('resume') : t('pause');
 }
 
 function drawGrid() {
@@ -199,9 +284,16 @@ pauseBtn.addEventListener('click', () => {
   render();
 });
 
+languageSelectEl.addEventListener('change', () => {
+  language = languageSelectEl.value;
+  applyTranslations();
+  render();
+});
+
 setInterval(() => {
   state = tick(state);
   render();
 }, INITIAL_TICK_MS);
 
+applyTranslations();
 render();

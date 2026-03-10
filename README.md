@@ -18,6 +18,7 @@ A minimal browser-based implementation of the classic Snake game.
 - Score tracking
 - Game over on wall or self collision
 - Restart and pause/resume
+- English/French UI language switcher
 
 ## Controls
 
@@ -25,6 +26,7 @@ A minimal browser-based implementation of the classic Snake game.
 - Pause/Resume: `Space` or **Pause** button
 - Restart: **Restart** button
 - Mobile/small screens: on-screen direction buttons
+- Language: choose **English** or **Français** from the selector
 
 ## Run
 

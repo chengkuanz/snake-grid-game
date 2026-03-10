@@ -30,6 +30,13 @@ h1 {
   font-size: 1.5rem;
 }
 
+.language {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
 .hud {
   display: flex;
   justify-content: space-between;
