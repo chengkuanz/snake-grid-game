@@ -1,0 +1,89 @@
+:root {
+  --bg: #f2f2f2;
+  --fg: #1a1a1a;
+  --panel: #ffffff;
+  --border: #bcbcbc;
+  --snake: #2f7a34;
+  --food: #c0392b;
+  --grid: #e4e4e4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.app {
+  max-width: 520px;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.hud p {
+  margin: 0;
+}
+
+.board-wrap {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+}
+
+#board {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+button {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.touch {
+  margin-top: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(60px, 1fr));
+  gap: 0.4rem;
+  max-width: 260px;
+}
+
+.help {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .touch {
+    display: none;
+  }
+}
