@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createInitialState, setDirection, tick, placeFood } from './snake-logic.js';
 
+// Fixed RNG output keeps spawning and movement-dependent assertions deterministic.
 function fakeRng(value) {
   return () => value;
 }

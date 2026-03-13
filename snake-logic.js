@@ -37,6 +37,7 @@ export function createInitialState(grid = GRID_SIZE, rng = Math.random) {
 
 export function setDirection(state, nextDir) {
   if (!DIRS[nextDir] || state.gameOver) return state;
+  // Reverse turns are blocked to prevent the head from moving directly into the body.
   if (OPPOSITE[state.direction] === nextDir) return state;
   return { ...state, pendingDirection: nextDir };
 }
@@ -49,6 +50,7 @@ export function togglePause(state) {
 export function tick(state, rng = Math.random) {
   if (state.gameOver || state.paused) return state;
 
+  // Direction changes are queued so each tick applies at most one turn.
   const direction = state.pendingDirection;
   const delta = DIRS[direction];
   const head = state.snake[0];
@@ -60,6 +62,7 @@ export function tick(state, rng = Math.random) {
 
   const ate = nextHead.x === state.food.x && nextHead.y === state.food.y;
   const grownSnake = [nextHead, ...state.snake];
+  // A normal move drops the tail; eating keeps the extra segment.
   const nextSnake = ate ? grownSnake : grownSnake.slice(0, -1);
 
   return {
@@ -91,6 +94,7 @@ export function placeFood(snake, grid, rng = Math.random) {
   }
 
   if (freeCells.length === 0) {
+    // Sentinel value for a completely full board; the UI can treat this as no more food.
     return { x: -1, y: -1 };
   }
 
