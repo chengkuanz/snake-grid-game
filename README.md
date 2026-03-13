@@ -10,7 +10,6 @@ A minimal browser-based implementation of the classic Snake game.
 <img width="1366" height="889" alt="Screenshot 2026-03-10 at 7 24 12 PM" src="https://github.com/user-attachments/assets/d5325fd5-688f-43c1-aac7-33ced06ce6d5" />
 
 
-
 ## Features
 
 - Fixed grid movement loop
