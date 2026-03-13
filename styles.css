@@ -3,9 +3,25 @@
   --fg: #1a1a1a;
   --panel: #ffffff;
   --border: #bcbcbc;
+  --board-bg: #ffffff;
   --snake: #2f7a34;
   --food: #c0392b;
   --grid: #e4e4e4;
+  --control-bg: #ffffff;
+  --link: #1a1a1a;
+}
+
+body[data-theme='dark'] {
+  --bg: #121212;
+  --fg: #f1f1f1;
+  --panel: #1d1d1d;
+  --border: #4a4a4a;
+  --board-bg: #171717;
+  --snake: #5bc46a;
+  --food: #ff6b57;
+  --grid: #2f2f2f;
+  --control-bg: #242424;
+  --link: #f1f1f1;
 }
 
 * {
@@ -41,6 +57,7 @@ h1 {
 }
 
 .language,
+.theme,
 .settings,
 .controls {
   display: flex;
@@ -79,7 +96,7 @@ h1 {
   max-width: 100%;
   aspect-ratio: 1;
   margin: 0 auto;
-  background: #fff;
+  background: var(--board-bg);
   border: 1px solid var(--border);
 }
 
@@ -90,7 +107,7 @@ h1 {
 button {
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--border);
-  background: #fff;
+  background: var(--control-bg);
   color: var(--fg);
   cursor: pointer;
 }
@@ -113,7 +130,7 @@ button {
 }
 
 .repo-link a {
-  color: var(--fg);
+  color: var(--link);
 }
 
 .repo-link a:hover,
@@ -124,7 +141,7 @@ button {
 select {
   padding: 0.45rem 0.5rem;
   border: 1px solid var(--border);
-  background: #fff;
+  background: var(--control-bg);
   color: var(--fg);
 }
 

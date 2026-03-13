@@ -106,6 +106,8 @@ const stateLabelEl = document.getElementById('state-label');
 const helpTextEl = document.getElementById('help-text');
 const languageLabelEl = document.getElementById('language-label');
 const languageSelectEl = document.getElementById('language-select');
+const themeLabelEl = document.getElementById('theme-label');
+const themeSelectEl = document.getElementById('theme-select');
 const sizeLabelEl = document.getElementById('size-label');
 const sizeSelectEl = document.getElementById('size-select');
 const dirUpEl = document.getElementById('dir-up');
@@ -123,6 +125,7 @@ const ctx = board.getContext('2d');
 
 let state = createInitialState(DEFAULT_GRID_SIZE);
 let language = 'en';
+let theme = 'light';
 let currentGridSize = DEFAULT_GRID_SIZE;
 let hasManualGridSelection = false;
 
@@ -130,6 +133,9 @@ const I18N = {
   en: {
     pageTitle: 'Snake',
     languageLabel: 'Language',
+    themeLabel: 'Theme',
+    themeLight: 'Light',
+    themeDark: 'Dark',
     sizeLabel: 'Size',
     scoreLabel: 'Score',
     stateLabel: 'State',
@@ -149,11 +155,15 @@ const I18N = {
     controlsAria: 'Controls',
     touchAria: 'On-screen controls',
     languageAria: 'Language selector',
+    themeAria: 'Theme settings',
     settingsAria: 'Game settings',
   },
   fr: {
     pageTitle: 'Serpent',
     languageLabel: 'Langue',
+    themeLabel: 'Theme',
+    themeLight: 'Clair',
+    themeDark: 'Sombre',
     sizeLabel: 'Taille',
     scoreLabel: 'Score',
     stateLabel: 'Etat',
@@ -173,6 +183,7 @@ const I18N = {
     controlsAria: 'Commandes',
     touchAria: 'Commandes a l ecran',
     languageAria: 'Selecteur de langue',
+    themeAria: 'Parametres du theme',
     settingsAria: 'Parametres du jeu',
   },
 };
@@ -185,6 +196,9 @@ function applyTranslations() {
   document.documentElement.lang = language;
   document.title = t('pageTitle');
   languageLabelEl.textContent = t('languageLabel');
+  themeLabelEl.textContent = t('themeLabel');
+  themeSelectEl.options[0].textContent = t('themeLight');
+  themeSelectEl.options[1].textContent = t('themeDark');
   sizeLabelEl.textContent = t('sizeLabel');
   scoreLabelEl.textContent = t('scoreLabel');
   stateLabelEl.textContent = t('stateLabel');
@@ -200,7 +214,19 @@ function applyTranslations() {
   document.querySelector('.controls').setAttribute('aria-label', t('controlsAria'));
   document.querySelector('.touch').setAttribute('aria-label', t('touchAria'));
   document.querySelector('.language').setAttribute('aria-label', t('languageAria'));
+  document.querySelector('.theme').setAttribute('aria-label', t('themeAria'));
   document.querySelector('.settings').setAttribute('aria-label', t('settingsAria'));
+}
+
+function getThemeColor(name) {
+  return window.getComputedStyle(document.body).getPropertyValue(name).trim();
+}
+
+function applyTheme(nextTheme) {
+  theme = nextTheme === 'dark' ? 'dark' : 'light';
+  document.body.dataset.theme = theme;
+  themeSelectEl.value = theme;
+  window.localStorage.setItem('snake-theme', theme);
 }
 
 function render() {
@@ -312,10 +338,10 @@ function resizeBoard() {
 function drawGrid() {
   const boardSize = board.width / (window.devicePixelRatio || 1);
   ctx.clearRect(0, 0, boardSize, boardSize);
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = getThemeColor('--board-bg');
   ctx.fillRect(0, 0, boardSize, boardSize);
 
-  ctx.strokeStyle = '#e4e4e4';
+  ctx.strokeStyle = getThemeColor('--grid');
   ctx.lineWidth = 1;
   const cellSize = getCellSize();
   for (let i = 0; i <= state.grid; i += 1) {
@@ -334,7 +360,7 @@ function drawGrid() {
 
 function drawSnake() {
   const cellSize = getCellSize();
-  ctx.fillStyle = '#2f7a34';
+  ctx.fillStyle = getThemeColor('--snake');
   for (const part of state.snake) {
     ctx.fillRect(part.x * cellSize + 1, part.y * cellSize + 1, cellSize - 2, cellSize - 2);
   }
@@ -342,7 +368,7 @@ function drawSnake() {
 
 function drawFood() {
   const cellSize = getCellSize();
-  ctx.fillStyle = '#c0392b';
+  ctx.fillStyle = getThemeColor('--food');
   ctx.fillRect(state.food.x * cellSize + 1, state.food.y * cellSize + 1, cellSize - 2, cellSize - 2);
 }
 
@@ -402,6 +428,11 @@ languageSelectEl.addEventListener('change', () => {
   render();
 });
 
+themeSelectEl.addEventListener('change', () => {
+  applyTheme(themeSelectEl.value);
+  render();
+});
+
 sizeSelectEl.addEventListener('change', () => {
   currentGridSize = Number(sizeSelectEl.value);
   hasManualGridSelection = true;
@@ -420,6 +451,7 @@ setInterval(() => {
   render();
 }, INITIAL_TICK_MS);
 
+applyTheme(window.localStorage.getItem('snake-theme') || 'light');
 sizeSelectEl.value = String(currentGridSize);
 applyTranslations();
 resizeBoard();
