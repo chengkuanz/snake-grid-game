@@ -107,6 +107,20 @@ button {
   font-size: 0.9rem;
 }
 
+.repo-link {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.repo-link a {
+  color: var(--fg);
+}
+
+.repo-link a:hover,
+.repo-link a:focus-visible {
+  text-decoration: none;
+}
+
 select {
   padding: 0.45rem 0.5rem;
   border: 1px solid var(--border);
